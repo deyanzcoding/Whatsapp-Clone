@@ -12,16 +12,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  // @override
-  //  void initState() {
-  //    // TODO: implement initState
-  //    super.initState();
-  //    Timer(Duration(seconds: 3), () {
-  //      Navigator.pushReplacement(context,
-  //        MaterialPageRoute(builder: (context) => WelcomeScreen())
-  //      );
-  //    });
-  // }
+  @override
+   void initState() {
+     // TODO: implement initState
+     super.initState();
+     Timer(Duration(seconds: 3), () {
+       Navigator.pushReplacement(context,
+         MaterialPageRoute(builder: (context) => WelcomeScreen())
+       );
+     });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 UiHelper.CustomText(
                   text: "from",
                   height: 18,
-                  fontweight: FontWeight.w600,
+                  fontweight: FontWeight.w400,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,

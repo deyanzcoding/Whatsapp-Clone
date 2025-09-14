@@ -8,15 +8,16 @@ class UiHelper {
   }) {
     return SizedBox(
       height: 45,
-      width: 325,
+      width: 315,
       child: ElevatedButton(
         onPressed: () {
           callback();
         },
-        style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(40),
-
-        )),
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40),
+          ),
+        ),
 
         child: Text(
           buttonname,
@@ -34,7 +35,11 @@ class UiHelper {
   }) {
     return Text(
       text,
-      style: TextStyle(fontSize: height, color: color ?? Color(0xff5e5e5e), fontWeight: fontweight),
+      style: TextStyle(
+        fontSize: height,
+        color: color ?? Color(0xff5e5e5e),
+        fontWeight: fontweight,
+      ),
     );
   }
 } //customeButton

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/Screens/onboarding/login_screen.dart';
 import 'package:whatsapp_clone/Widgets/ui_helper.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -18,7 +19,7 @@ class WelcomeScreen extends StatelessWidget {
               height: 20,
               color: Color(0xFF000000),
             ),
-            SizedBox(height: 5,),
+            SizedBox(height: 5),
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -30,20 +31,37 @@ class WelcomeScreen extends StatelessWidget {
                   style: TextStyle(color: Colors.black38, fontSize: 16),
 
                   children: [
-                    TextSpan(text: "Read out ", ),
-                    TextSpan(text: "Privacy Policy", style: TextStyle(color: Color(0xff0C42CC), fontSize: 15)),
-                    TextSpan(text: ". Tap \"Agree and continue\" to accept the ", ),
-                    TextSpan(text: "Team of Service.", style: TextStyle(color: Color(0xff0C42CC), fontSize: 15)),
-                  ]
+                    TextSpan(text: "Read out "),
+                    TextSpan(
+                      text: "Privacy Policy",
+                      style: TextStyle(color: Color(0xff0C42CC), fontSize: 15),
+                    ),
+                    TextSpan(
+                      text: ". Tap \"Agree and continue\" to accept the ",
+                    ),
+                    TextSpan(
+                      text: "Team of Service.",
+                      style: TextStyle(color: Color(0xff0C42CC), fontSize: 15),
+                    ),
+                  ],
                 ),
               ),
             ),
-            SizedBox(height: 40,),
+            SizedBox(height: 40),
           ],
         ),
       ),
-      floatingActionButton: UiHelper.CustomButton(callback: () {
-      }, buttonname: "Agree and continue"),
+
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: 20),
+        child: UiHelper.CustomButton(
+        callback: () {
+          Navigator.push(context, 
+            MaterialPageRoute(builder: (context) => LoginScreen()),
+          );
+        },
+        buttonname: "Agree and continue",
+       )),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
