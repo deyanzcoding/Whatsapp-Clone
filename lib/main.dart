@@ -1,5 +1,7 @@
 //Whatsapp Clone project
+
 import 'package:flutter/material.dart';
+import 'Screens/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +19,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Whatsapp',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF00A884)),
+        useMaterial3: false,
+      ),
       home: SplashScreen()
 
     );
