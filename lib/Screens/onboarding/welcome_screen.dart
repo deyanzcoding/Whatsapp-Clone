@@ -31,9 +31,9 @@ class WelcomeScreen extends StatelessWidget {
 
                   children: [
                     TextSpan(text: "Read out ", ),
-                    TextSpan(text: "Privacy Policy", style: TextStyle(color: Color(0xff0C42CC))),
+                    TextSpan(text: "Privacy Policy", style: TextStyle(color: Color(0xff0C42CC), fontSize: 15)),
                     TextSpan(text: ". Tap \"Agree and continue\" to accept the ", ),
-                    TextSpan(text: "Team of Service.", style: TextStyle(color: Color(0xff0C42CC))),
+                    TextSpan(text: "Team of Service.", style: TextStyle(color: Color(0xff0C42CC), fontSize: 15)),
                   ]
                 ),
               ),
