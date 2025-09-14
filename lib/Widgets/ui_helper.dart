@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
 
 class UiHelper {
   static CustomButton({
@@ -17,6 +16,7 @@ class UiHelper {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40),
           ),
+          backgroundColor: Color(0xff25d366),
         ),
 
         child: Text(

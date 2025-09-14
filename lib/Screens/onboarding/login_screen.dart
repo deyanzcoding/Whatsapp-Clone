@@ -29,7 +29,7 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 5),
 
-              UiHelper.CustomText(text: "What\'s my number?", height: 16, color: Color(0xff25d366)),
+              UiHelper.CustomText(text: "What's my number?", height: 16, color: Color(0xff25d366)),
               SizedBox(height: 30,),
 
               TextFormField(
