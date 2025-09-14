@@ -2,8 +2,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/Screens/home/chats_screen.dart';
 import 'package:whatsapp_clone/Widgets/ui_helper.dart';
+import 'onboarding/welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => ChatsScreen())
+        MaterialPageRoute(builder: (context) => WelcomeScreen())
       );
     });
  }
