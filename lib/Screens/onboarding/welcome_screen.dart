@@ -9,16 +9,42 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             Image.asset("assets/images/welcome_whatsapp.png"),
-        SizedBox(height: 20,),
-        UiHelper.CustomText(
-          text: "Welcome to WhatsApp", height: 20, color: Color(0xFF000000),)
+            SizedBox(height: 40),
+            UiHelper.CustomText(
+              text: "Welcome to WhatsApp",
+              height: 20,
+              color: Color(0xFF000000),
+            ),
+            SizedBox(height: 5,),
 
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: RichText(
+                // by default text of rich text
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: "",
+                  style: TextStyle(color: Colors.black38, fontSize: 16),
+
+                  children: [
+                    TextSpan(text: "Read out ", ),
+                    TextSpan(text: "Privacy Policy", style: TextStyle(color: Color(0xff0C42CC))),
+                    TextSpan(text: ". Tap \"Agree and continue\" to accept the ", ),
+                    TextSpan(text: "Team of Service.", style: TextStyle(color: Color(0xff0C42CC))),
+                  ]
+                ),
+              ),
+            ),
+            SizedBox(height: 40,),
           ],
         ),
       ),
+      floatingActionButton: UiHelper.CustomButton(callback: () {
+      }, buttonname: "Agree and continue"),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
