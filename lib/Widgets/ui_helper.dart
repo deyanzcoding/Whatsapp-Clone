@@ -32,8 +32,12 @@ class UiHelper {
     required double height,
     Color? color,
     FontWeight? fontweight,
+    TextAlign? textalignment,
+    TextDirection? textdirection,
   }) {
     return Text(
+      textAlign: textalignment ?? TextAlign.start,
+      textDirection: textdirection ?? TextDirection.ltr,
       text,
       style: TextStyle(
         fontSize: height,

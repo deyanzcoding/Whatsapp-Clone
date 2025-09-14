@@ -12,7 +12,7 @@ class WelcomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/images/welcome_whatsapp.png"),
+            Image.asset("assets/images/welcome_whatsapp.png", scale: 3,),
             SizedBox(height: 40),
             UiHelper.CustomText(
               text: "Welcome to WhatsApp",
@@ -31,7 +31,7 @@ class WelcomeScreen extends StatelessWidget {
                   style: TextStyle(color: Colors.black38, fontSize: 16),
 
                   children: [
-                    TextSpan(text: "Read out "),
+                    TextSpan(text: "Read our "),
                     TextSpan(
                       text: "Privacy Policy",
                       style: TextStyle(color: Color(0xff0C42CC), fontSize: 15),
@@ -40,7 +40,7 @@ class WelcomeScreen extends StatelessWidget {
                       text: ". Tap \"Agree and continue\" to accept the ",
                     ),
                     TextSpan(
-                      text: "Team of Service.",
+                      text: "Terms of Service.",
                       style: TextStyle(color: Color(0xff0C42CC), fontSize: 15),
                     ),
                   ],
