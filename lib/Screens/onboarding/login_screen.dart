@@ -3,11 +3,65 @@ import 'package:flutter/material.dart';
 
 import '../../Widgets/ui_helper.dart';
 
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    String _phoneNumber = '+92 336 9999205';
+    void _showConfirmationDialog() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0), // Matches the rounded corners
+            ),
+            title: Text(
+              'Is this the correct number?',
+              style: TextStyle(color: Colors.grey[600]),
+              textAlign: TextAlign.center,
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  _phoneNumber,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context); // Close dialog
+                  // Add edit logic here if needed
+                },
+                child: Text('Edit', style: TextStyle(color: Color(0xff25d366))),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xff25d366), // Green color for Yes button
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                ),
+                child: Text('Yes'),
+              ),
+            ],
+            actionsAlignment: MainAxisAlignment.center, // Center the buttons
+          );
+        },
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -151,7 +205,9 @@ class LoginScreen extends StatelessWidget {
 
       floatingActionButton: Padding(
         padding: EdgeInsets.only(bottom: 20),
-        child: UiHelper.CustomButton(callback: () {}, buttonname: 'Next'),
+        child: UiHelper.CustomButton(callback: () {
+          _showConfirmationDialog();
+        }, buttonname: 'Next'),
       ),
     );
   }
