@@ -35,10 +35,18 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       body: Center(
         child: Column(
           children: [
-            UiHelper.CustomText(text: "Verify +92 336 9999205", height: 20, color: Colors.black, fontweight: FontWeight.w700),
+            UiHelper.CustomText(text: "Verify +92 336 9999205", height: 25, color: Colors.black, fontweight: FontWeight.w600),
             SizedBox(height: 40,),
 
-            Image.asset('assets/images/otp_verification.png'),
+            Image.asset("assets/images/otp_verification.png", scale: 3,),
+            SizedBox(height: 40,),
+
+            UiHelper.CustomText(text: "Use your other phone to confirm moving WhatsApp to this one", height: 15, color: Colors.black, fontweight: FontWeight.w500),
+            SizedBox(height: 20,),
+
+            UiHelper.CustomText(text: "Enter the 6-digit code we sent to WhatsApp on your other phone.", height: 15, color: Colors.black, fontweight: FontWeight.w400),
+            SizedBox(height: 20,),
+
           ],
         ),
       ),
