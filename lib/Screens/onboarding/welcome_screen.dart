@@ -41,7 +41,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                     TextSpan(
                       text: "Terms of Service.",
-                      style: TextStyle(color: Color(0xff0C42CC), fontSize: 15, fontWeight: FontWeight.w600d),
+                      style: TextStyle(color: Color(0xff0C42CC), fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),

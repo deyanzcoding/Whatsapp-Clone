@@ -33,11 +33,51 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: 30,),
 
               TextFormField(
+                textAlign: TextAlign.center,
                 decoration: InputDecoration(
                   hintText: 'Pakistan',
+                  suffixIcon: Icon(Icons.arrow_drop_down),
+                  suffixIconColor: Color(0xff25d366),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xff25d366),
+                        )
+                    ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 2,
+                    )
+                  )
                 ),
               ),
 
+              Row(
+                children: [
+                  TextFormField(
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+
+                        hintText: 'Pakistan',
+                      prefixIcon: Icon(Icons.add),
+                      suffixIcon: Icon(Icons.arrow_drop_down),
+                      suffixIconColor: Color(0xff25d366),
+
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xff25d366),
+                        )
+                      )
+                    ),
+                  ),
+
+                  TextFormField(
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      hintText: 'Phone number',
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
