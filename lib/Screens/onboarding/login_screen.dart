@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../Widgets/ui_helper.dart';
@@ -8,6 +9,24 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        backgroundColor: Colors.white10,
+        actions: [
+          PopupMenuButton(
+            shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+            ),
+            icon: Icon(Icons.more_vert, color: Colors.black,),
+            offset: Offset(0, 45),
+            itemBuilder: (context) => [
+              PopupMenuItem(child: Text('Link as companion device')),
+              PopupMenuItem(child: Text('Help')),
+            ],
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 30),
@@ -29,8 +48,12 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 5),
 
-              UiHelper.CustomText(text: "What's my number?", height: 16, color: Color(0xff25d366)),
-              SizedBox(height: 30,),
+              UiHelper.CustomText(
+                text: "What's my number?",
+                height: 16,
+                color: Color(0xff25d366),
+              ),
+              SizedBox(height: 30),
 
               TextFormField(
                 textAlign: TextAlign.center,
@@ -38,17 +61,15 @@ class LoginScreen extends StatelessWidget {
                   hintText: 'Pakistan',
                   suffixIcon: Icon(Icons.arrow_drop_down),
                   suffixIconColor: Color(0xff25d366),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xff25d366),
-                        )
-                    ),
-                  focusedBorder: UnderlineInputBorder(
+                  enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
-                      width: 2,
                       color: Color(0xff25d366),
-                    )
-                  )
+                      width: 1.5,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(width: 2, color: Color(0xff25d366)),
+                  ),
                 ),
               ),
 
@@ -56,58 +77,63 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   // Country code TextFormField
                   Container(
-                    width: 60, // Fixed width for country code field
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: '+ 92',
-
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xff25d366), // Green bottom line
-                            width: 1.0,
-                          ),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xff25d366), // Green bottom line when focused
-                            width: 2.0,
-                          ),
-                        ),
-                        contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 8), // Adjust padding
-                        hintStyle: TextStyle(
-                          color: Colors.grey[600], // Subtle hint text color
-                          fontSize: 16,
+                    width: 90, // Compact width for "+92"
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Color(0xff25d366),
+                          width: 1.5,
                         ),
                       ),
-                      style: TextStyle(fontSize: 16), // Text style for input
-                      // readOnly: true, // Make it read-only to simulate country picker
-                      onTap: () {
-                        // Add logic for country picker (e.g., show modal or dropdown)
-                        print("Country picker tapped");
-                      },
+                    ),
+                    child: CountryCodePicker(
+                      initialSelection: 'PK',
+                      // Starts with Pakistan (+92)
+                      favorite: ['PK', 'IN', 'US', 'GB', 'SA'],
+                      // Limit to these 5 countries in dropdown
+                      showDropDownButton: true,
+                      // Shows dropdown arrow
+                      padding: EdgeInsets.zero,
+                      // Remove extra padding for compact look
+                      textStyle: TextStyle(fontSize: 16, color: Colors.black),
+                      dialogTextStyle: TextStyle(fontSize: 16),
+                      // Style for dropdown items
+                      showFlag: false,
+                      // Show country flags in dropdown (optional, like WhatsApp)
+                      showOnlyCountryWhenClosed: false,
+                      // Show dial code when closed
+                      alignLeft: false, // Center the content
                     ),
                   ),
+
                   SizedBox(width: 10), // Space between fields
                   // Phone number TextFormField
                   Expanded(
                     child: TextFormField(
-                      textAlign: TextAlign.start, // Left-align for phone number
-                      keyboardType: TextInputType.phone, // Numeric keyboard
+                      textAlign: TextAlign.start,
+                      // Left-align for phone number
+                      keyboardType: TextInputType.phone,
+                      // Numeric keyboard
                       decoration: InputDecoration(
                         hintText: 'Phone number',
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0xff25d366), // Green bottom line
-                            width: 2.0,
+                            width: 1.5,
                           ),
                         ),
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0xff25d366), // Green bottom line when focused
+                            color: Color(0xff25d366),
+                            // Green bottom line when focused
                             width: 2.0,
                           ),
                         ),
-                        contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 12), // Adjust padding
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 12,
+                        ),
+                        // Adjust padding
                         hintStyle: TextStyle(
                           color: Colors.grey[600], // Subtle hint text color
                           fontSize: 16,
@@ -121,6 +147,11 @@ class LoginScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: 20),
+        child: UiHelper.CustomButton(callback: () {}, buttonname: 'Next'),
       ),
     );
   }
