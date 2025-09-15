@@ -1,5 +1,6 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/Screens/onboarding/otp_verification_screen.dart';
 
 import '../../Widgets/ui_helper.dart';
 
@@ -46,7 +47,7 @@ class LoginScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => )
+                    MaterialPageRoute(builder: (context) => OtpVerificationScreen()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
