@@ -10,7 +10,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  String selectedLang = "English";
+  String selectedLang = "Urdu"; // Match with languages list
 
   List<String> languages = ["Urdu", "Pashto", "Chinese", "Japanese", "Korean"];
 
@@ -29,16 +29,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               color: Color(0xFF000000),
             ),
             SizedBox(height: 5),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: RichText(
-                // by default text of rich text
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  text: "",
                   style: TextStyle(color: Colors.black38, fontSize: 16),
-
                   children: [
                     TextSpan(text: "Read our "),
                     TextSpan(
@@ -49,9 +45,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    TextSpan(
-                      text: ". Tap \"Agree and continue\" to accept the ",
-                    ),
+                    TextSpan(text: ". Tap \"Agree and continue\" to accept the "),
                     TextSpan(
                       text: "Terms of Service.",
                       style: TextStyle(
@@ -65,7 +59,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
             SizedBox(height: 25),
-
             DropdownButtonFormField<String>(
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.language, color: Colors.green),
@@ -88,12 +81,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               value: selectedLang,
               dropdownColor: Colors.white,
               icon: Icon(Icons.arrow_drop_down, color: Colors.green),
-            )
-
+            ),
           ],
         ),
       ),
-
       floatingActionButton: Padding(
         padding: EdgeInsets.only(bottom: 50),
         child: UiHelper.CustomButton(
