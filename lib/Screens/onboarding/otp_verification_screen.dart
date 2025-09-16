@@ -22,35 +22,53 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
-              offset: Offset(0, 45),
-              icon: Icon(Icons.more_vert),
-              itemBuilder: (context) => [
-                PopupMenuItem(child: Text('Help')),
-              ]
-          )
+            offset: Offset(0, 45),
+            icon: Icon(Icons.more_vert),
+            itemBuilder: (context) => [PopupMenuItem(child: Text('Help'))],
+          ),
         ],
       ),
-      
-      
-      body: Center(
+
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         child: Column(
           children: [
-            UiHelper.CustomText(text: "Verify +92 336 9999205", height: 25, color: Colors.black, fontweight: FontWeight.w600),
-            SizedBox(height: 40,),
+            UiHelper.CustomText(
+              text: "Verify +92 336 9999205",
+              height: 25,
+              color: Colors.black,
+              fontweight: FontWeight.w600,
+            ),
+            SizedBox(height: 40),
 
-            Image.asset("assets/images/otp_verification.png", scale: 3,),
-            SizedBox(height: 40,),
+            Image.asset("assets/images/otp_verification.png", scale: 3),
+            SizedBox(height: 40),
 
-            UiHelper.CustomText(text: "Use your other phone to confirm moving WhatsApp to this one", height: 15, color: Colors.black, fontweight: FontWeight.w500),
-            SizedBox(height: 20,),
+            UiHelper.CustomText(
+              text:
+                  "Use your other phone to confirm moving WhatsApp to this one",
+              height: 15,
+              color: Colors.black,
+              fontweight: FontWeight.w500,
+              textalignment: TextAlign.center,
+            ),
+            SizedBox(height: 25),
 
-            UiHelper.CustomText(text: "Enter the 6-digit code we sent to WhatsApp on your other phone.", height: 15, color: Colors.black, fontweight: FontWeight.w400),
-            SizedBox(height: 20,),
+            UiHelper.CustomText(
+              text:
+                  "Enter the 6-digit code we sent to WhatsApp on your other phone.",
+              height: 15,
+              color: Colors.black,
+              fontweight: FontWeight.w400,
+              textalignment: TextAlign.center,
 
+            ),
+            SizedBox(height: 20),
+
+            
           ],
         ),
       ),
-      
     );
   }
 }
