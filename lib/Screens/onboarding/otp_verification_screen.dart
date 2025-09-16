@@ -61,11 +61,33 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               color: Colors.black,
               fontweight: FontWeight.w400,
               textalignment: TextAlign.center,
-
             ),
             SizedBox(height: 20),
 
-            
+            //otp-field
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(6, (index) {
+            return Container(
+              width: 45,
+              margin: EdgeInsets.symmetric(horizontal: 5),
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                textAlign: TextAlign.center,
+                maxLength: 1, // only 1 digit
+                decoration: InputDecoration(
+                  counterText: "", // hide counter below
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+            );
+          })
+        ),
+            SizedBox(height: 40),
+
+            UiHelper.CustomText(text: 'Need help getting a code?', height: 15, fontweight: FontWeight.w600, color: Color(0xff25d377)),
           ],
         ),
       ),
