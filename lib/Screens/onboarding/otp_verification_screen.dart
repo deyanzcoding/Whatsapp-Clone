@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:whatsapp_clone/Widgets/ui_helper.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
@@ -65,27 +66,26 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             SizedBox(height: 20),
 
             //otp-field
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(6, (index) {
-            return Container(
-              width: 45,
-              margin: EdgeInsets.symmetric(horizontal: 5),
-              child: TextFormField(
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.center,
-                maxLength: 1, // only 1 digit
-                decoration: InputDecoration(
-                  counterText: "", // hide counter below
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
+             Padding(
+               padding: const EdgeInsets.symmetric(horizontal: 15.0),
+               child: PinCodeTextField(
+                 appContext: context,
+                 length: 6,
+                 keyboardType: TextInputType.number,
+                 onChanged: (value) {
+                   print(value);
+                 },
+                 pinTheme: PinTheme(
+                   shape: PinCodeFieldShape.underline, // 👈 underline style
+                   fieldHeight: 50,
+                   fieldWidth: 40,
+                   activeColor: Color(0xff25d366),
+                   selectedColor: Color(0xff25d366),
+                   inactiveColor: Colors.grey,
                 ),
-              ),
-            );
-          })
-        ),
-            SizedBox(height: 40),
+                           ),
+             ),
+            SizedBox(height: 60),
 
             UiHelper.CustomText(text: 'Need help getting a code?', height: 15, fontweight: FontWeight.w600, color: Color(0xff25d377)),
           ],
