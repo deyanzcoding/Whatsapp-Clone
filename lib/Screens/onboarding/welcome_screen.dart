@@ -10,9 +10,9 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  String selectedLang = "Urdu"; // Match with languages list
+  String selectedLang = "English"; // Match with languages list
 
-  List<String> languages = ["Urdu", "Pashto", "Chinese", "Japanese", "Korean"];
+  List<String> languages = ["English", "Pashto", "Chinese", "Japanese", "Korean"];
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +25,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             SizedBox(height: 40),
             UiHelper.CustomText(
               text: "Welcome to WhatsApp",
-              height: 20,
+              height: 27,
               color: Color(0xFF000000),
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 10),
+
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 6.0),
               child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
@@ -59,28 +60,32 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
             SizedBox(height: 25),
-            DropdownButtonFormField<String>(
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.language, color: Colors.green),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 105.0),
+              child: DropdownButtonFormField<String>(
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.language, color: Color(0xff25d366)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(vertical: 10),
                 ),
-                contentPadding: EdgeInsets.symmetric(vertical: 10),
+                items: languages.map((String lang) {
+                  return DropdownMenuItem(
+                    child: Text(lang),
+                    value: lang,
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    selectedLang = value!;
+                  });
+                },
+                value: selectedLang,
+                dropdownColor: Colors.white,
+                icon: Icon(Icons.arrow_drop_down_outlined, color: Color(0xff25d366)),
               ),
-              items: languages.map((String lang) {
-                return DropdownMenuItem(
-                  child: Text(lang),
-                  value: lang,
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  selectedLang = value!;
-                });
-              },
-              value: selectedLang,
-              dropdownColor: Colors.white,
-              icon: Icon(Icons.arrow_drop_down, color: Colors.green),
             ),
           ],
         ),

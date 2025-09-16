@@ -5,8 +5,19 @@ import 'package:whatsapp_clone/Screens/onboarding/otp_verification_screen.dart';
 import '../../Widgets/ui_helper.dart';
 
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+   LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+   String selectedContries = "Pakistan";
+ // Match with country list
+   List<String> country = ["Pakistan", "India", "Bangladesh", "Nepal", "UAE"];
+
+   TextEditingController phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -112,22 +123,37 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 30),
 
-              TextFormField(
-                textAlign: TextAlign.center,
+              DropdownButtonFormField<String>(
                 decoration: InputDecoration(
-                  hintText: 'Pakistan',
-                  suffixIcon: Icon(Icons.arrow_drop_down),
-                  suffixIconColor: Color(0xff25d366),
+                  // prefixIcon: Icon(Icons.language, color: Color(0xff25d366)),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: Color(0xff25d366),
                       width: 1.5,
-                    ),
+                    )
                   ),
                   focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: Color(0xff25d366)),
+                    borderSide: BorderSide(
+                      color: Color(0xff25d366),
+                      width: 1.5,
+                    )
                   ),
+                  contentPadding: EdgeInsets.symmetric(vertical: 10),
                 ),
+                items: country.map((String lang) {
+                  return DropdownMenuItem(
+                    child: Text(lang),
+                    value: lang,
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    selectedContries = value!;
+                  });
+                },
+                value: selectedContries,
+                dropdownColor: Colors.white,
+                icon: Icon(Icons.arrow_drop_down_outlined, color: Color(0xff25d366)),
               ),
 
               Row(
@@ -164,12 +190,14 @@ class LoginScreen extends StatelessWidget {
                   ),
 
                   SizedBox(width: 10), // Space between fields
+
                   // Phone number TextFormField
                   Expanded(
                     child: TextFormField(
+                      controller: phoneController,
                       textAlign: TextAlign.start,
                       // Left-align for phone number
-                      keyboardType: TextInputType.phone,
+                      keyboardType: TextInputType.number,
                       // Numeric keyboard
                       decoration: InputDecoration(
                         hintText: 'Phone number',
@@ -207,7 +235,7 @@ class LoginScreen extends StatelessWidget {
       ),
 
       floatingActionButton: Padding(
-        padding: EdgeInsets.only(bottom: 20),
+        padding: EdgeInsets.only(bottom: 50),
         child: UiHelper.CustomButton(callback: () {
           _showConfirmationDialog();
         }, buttonname: 'Next'),
