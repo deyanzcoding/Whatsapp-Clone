@@ -32,10 +32,15 @@ class ProfileScreen extends StatelessWidget {
             SizedBox(height: 30),
 
             //circle avatar
-            CircleAvatar(
-              radius: 70,
-              backgroundColor: Color(0xffD9D9D9),
-              child: Icon(Icons.add_a_photo , size: 60, color: Colors.grey,),
+            GestureDetector(
+              onTap: () {
+                _openBottome(context);
+              },
+              child: CircleAvatar(
+                radius: 70,
+                backgroundColor: Color(0xffD9D9D9),
+                child: Icon(Icons.add_a_photo , size: 60, color: Colors.grey,),
+              ),
             ),
             SizedBox(height: 30,),
 
@@ -90,4 +95,24 @@ class ProfileScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
+
+  _openBottome(BuildContext context) {
+    return showModalBottomSheet(context: context, builder: (BuildContext context) {
+      return Container(
+        height: 200,
+        width: 200,
+        child: Column(children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            Icon(Icons.camera_alt),
+
+          ],
+          )
+        ],,
+        ),
+      );
+    });
+  }
 }
+
