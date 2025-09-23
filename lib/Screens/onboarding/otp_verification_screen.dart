@@ -4,8 +4,15 @@ import 'package:whatsapp_clone/Widgets/ui_helper.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
 
-  String phonenuber;
-  OtpVerificationScreen({super.key, required this.phonenuber});
+  String phonenumber;
+  OtpVerificationScreen({super.key, required this.phonenumber});
+
+  TextEditingController otpController1 = TextEditingController();
+  TextEditingController otpController2 = TextEditingController();
+  TextEditingController otpController3 = TextEditingController();
+  TextEditingController otpController4 = TextEditingController();
+  TextEditingController otpController5 = TextEditingController();
+  TextEditingController otpController6 = TextEditingController();
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
@@ -37,7 +44,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         child: Column(
           children: [
             UiHelper.CustomText(
-              text: "Verify +92 336 9999205",
+              text: "Verify ${widget.phonenumber}",
               height: 25,
               color: Colors.black,
               fontweight: FontWeight.w600,
@@ -89,6 +96,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
              ),
             SizedBox(height: 60),
 
+            Row(
+              children: [
+                UiHelper.Custom
+              ],
+            )
+
+            SizedBox(height: 60),
             UiHelper.CustomText(text: 'Need help getting a code?', height: 15, fontweight: FontWeight.w600, color: Color(0xff25d377)),
           ],
         ),

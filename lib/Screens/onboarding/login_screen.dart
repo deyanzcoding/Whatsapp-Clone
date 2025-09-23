@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OtpVerificationScreen(phonenuber: _phoneNumber,)),
+                      MaterialPageRoute(builder: (context) => OtpVerificationScreen(phonenumber: _phoneNumber,)),
                     );
                   },
                   style: ElevatedButton.styleFrom(
