@@ -48,7 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: pickedimage==null ? CircleAvatar(
                 radius: 70,
-                backgroundColor: Color(0xffD9D9D9), 
+                backgroundColor: Color(0xffD9D9D9),
                 child: Icon(Icons.add_a_photo , size: 60, color: Colors.grey,),
               ) : CircleAvatar(
                 radius: 80,
