@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OtpVerificationScreen()),
+                      MaterialPageRoute(builder: (context) => OtpVerificationScreen(phonenuber: _phoneNumber,)),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -77,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Please enter a valid 10-digit phone number')),
+          SnackBar(content: Text('Please enter a valid 10-digit phone number', style: TextStyle(fontWeight: FontWeight.w500)), backgroundColor: Color(0xff25d366)),
         );
       }
     }

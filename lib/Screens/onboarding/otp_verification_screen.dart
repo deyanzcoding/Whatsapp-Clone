@@ -3,7 +3,9 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:whatsapp_clone/Widgets/ui_helper.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
-  const OtpVerificationScreen({super.key});
+
+  String phonenuber;
+  OtpVerificationScreen({super.key, required this.phonenuber});
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
