@@ -1,10 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:whatsapp_clone/Widgets/ui_helper.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController nameController = TextEditingController();
+
+  File? pickedimage;
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +46,14 @@ class ProfileScreen extends StatelessWidget {
               onTap: () {
                 _openBottome(context);
               },
-              child: CircleAvatar(
+              child: pickedimage==null ? CircleAvatar(
                 radius: 70,
-                backgroundColor: Color(0xffD9D9D9),
+                backgroundColor: Color(0xffD9D9D9), 
                 child: Icon(Icons.add_a_photo , size: 60, color: Colors.grey,),
-              ),
+              ) : CircleAvatar(
+                radius: 80,
+                backgroundImage: FileImage(pickedimage!),
+              )
             ),
             SizedBox(height: 30,),
 
@@ -96,6 +109,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
+  //function for open the menu of selecting image just
   _openBottome(BuildContext context) {
     return showModalBottomSheet(context: context, builder: (BuildContext context) {
       return Container(
@@ -103,16 +117,35 @@ class ProfileScreen extends StatelessWidget {
         width: 200,
         child: Column(children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-            Icon(Icons.camera_alt),
+            IconButton(onPressed: () {
+              _pickImage(ImageSource.camera);
+            }, icon: Icon(Icons.add_a_photo, size: 80, color: Colors.grey,),),
+            IconButton(onPressed: () {
+              _pickImage(ImageSource.gallery);
+            }, icon: Icon(Icons.image, size: 80, color: Colors.grey,),)
 
           ],
           )
-        ],,
+        ],
         ),
       );
     });
+  }
+
+  //function for picking image
+  _pickImage(ImageSource imagesource) async {
+    try {
+    final photo = await ImagePicker().pickImage(source: imagesource);
+    if(photo == null) return;
+    final tempimage = File(photo.path);
+    setState(() {
+      pickedimage = tempimage;
+    });
+    } catch(ex) {
+      return ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(ex.toString()), backgroundColor: Color(0xff25d377),));
+    }
   }
 }
 
