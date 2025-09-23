@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:whatsapp_clone/Profile/profile_screen.dart';
+import 'package:whatsapp_clone/Screens/Profile/profile_screen.dart';
 import 'package:whatsapp_clone/Widgets/ui_helper.dart';
+
+import '../Profile/profile_screen.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   String phonenumber;
