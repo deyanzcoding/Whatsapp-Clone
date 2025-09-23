@@ -22,6 +22,9 @@ class _LoginScreenState extends State<LoginScreen> {
     String _phoneNumber = '$selectedCountryCode ${phoneController.text}'; // Dynamically build phone number
 
     void _showConfirmationDialog() {
+      // Construct phone number inside the method
+      String _phoneNumber = '$selectedCountryCode ${phoneController.text}';
+
       if (_formKey.currentState!.validate()) {
         showDialog(
           context: context,
@@ -39,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    _phoneNumber,
+                    _phoneNumber, // Use the dynamically constructed phone number
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
