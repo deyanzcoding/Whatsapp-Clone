@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:whatsapp_clone/Profile/profile_screen.dart';
 import 'package:whatsapp_clone/Widgets/ui_helper.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
-
   String phonenumber;
+
   OtpVerificationScreen({super.key, required this.phonenumber});
 
   TextEditingController otpController1 = TextEditingController();
@@ -72,38 +73,60 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               fontweight: FontWeight.w400,
               textalignment: TextAlign.center,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
 
             //otp-field
-             Padding(
-               padding: const EdgeInsets.symmetric(horizontal: 15.0),
-               child: PinCodeTextField(
-                 appContext: context,
-                 length: 6,
-                 keyboardType: TextInputType.number,
-                 onChanged: (value) {
-                   print(value);
-                 },
-                 pinTheme: PinTheme(
-                   shape: PinCodeFieldShape.underline, // 👈 underline style
-                   fieldHeight: 50,
-                   fieldWidth: 40,
-                   activeColor: Color(0xff25d366),
-                   selectedColor: Color(0xff25d366),
-                   inactiveColor: Colors.grey,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: PinCodeTextField(
+                appContext: context,
+                length: 6,
+                enableActiveFill: true,
+                keyboardType: TextInputType.number,
+                showCursor: false,
+                onCompleted: (value) {
+                  if (value.length == 6) {
+                    Future.delayed(Duration(seconds: 3), () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfileScreen(),
+                        ),
+                      );
+                    });
+                  }
+                },
+                onChanged: (value) {
+                  print(value);
+                },
+
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  // 👈 underline style
+                  fieldOuterPadding: EdgeInsets.symmetric(horizontal: 1.5),
+                  borderRadius: BorderRadius.circular(10),
+                  borderWidth: 1,
+                  fieldHeight: 45,
+                  fieldWidth: 45,
+                  //border
+                  selectedColor: Color(0xffD9D9D9),
+                  inactiveColor: Color(0xffD9D9D9),
+
+                  //background fill
+                  inactiveFillColor: Color(0xffD9D9D9),
+                  activeFillColor: Color(0xffD9D9D9),
+                  selectedFillColor: Color(0xffD9D9D9),
                 ),
-                           ),
-             ),
-            SizedBox(height: 60),
+              ),
+            ),
+            SizedBox(height: 45),
 
-            Row(
-              children: [
-                UiHelper.Custom
-              ],
-            )
-
-            SizedBox(height: 60),
-            UiHelper.CustomText(text: 'Need help getting a code?', height: 15, fontweight: FontWeight.w600, color: Color(0xff25d377)),
+            UiHelper.CustomText(
+              text: 'Need help getting a code?',
+              height: 15,
+              fontweight: FontWeight.w600,
+              color: Color(0xff25d377),
+            ),
           ],
         ),
       ),
