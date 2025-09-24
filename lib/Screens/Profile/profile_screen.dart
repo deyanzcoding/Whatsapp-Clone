@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:whatsapp_clone/Widgets/ui_helper.dart';
 
+import '../Home/home_screen.dart';
+
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key});
 
@@ -44,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             //circle avatar
             GestureDetector(
               onTap: () {
-                _openBottome(context);
+                _openBottom(context);
               },
               child: pickedimage==null ? CircleAvatar(
                 radius: 70,
@@ -102,7 +104,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           //     MaterialPageRoute(builder: (context) => LoginScreen()),
           //   );
           // },
-          buttonname: "Agree and continue", callback: () {  },
+          buttonname: "Next", callback: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        },
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -110,7 +114,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   //function for open the menu of selecting image just
-  _openBottome(BuildContext context) {
+  _openBottom(BuildContext context) {
     return showModalBottomSheet(context: context, builder: (BuildContext context) {
       return Container(
         height: 200,

@@ -1,6 +1,7 @@
 //Whatsapp Clone project
 
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/Screens/Home/home_screen.dart';
 import 'Screens/splash_screen.dart';
 
 void main() {
@@ -25,7 +26,8 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF00A884)),
         useMaterial3: false,
       ),
-      home: SplashScreen()
+      // home: SplashScreen()
+      home: HomeScreen(),
 
     );
   }
