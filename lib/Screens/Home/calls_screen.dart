@@ -11,8 +11,9 @@ class CallsScreen extends StatelessWidget {
           title: const Text(
             'Calls',
             style: TextStyle(
-              fontWeight: FontWeight.w700,
-              color: Color(0xff25d366),
+              fontWeight: FontWeight.w500,
+              fontSize: 25,
+              color: Colors.black,
             ),
           ),
           backgroundColor: Colors.white54,

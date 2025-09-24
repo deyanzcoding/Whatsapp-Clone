@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/Screens/Home/updates_screen.dart';
 import 'package:whatsapp_clone/Screens/Home/community_screen.dart';
 import 'package:whatsapp_clone/Screens/Home/calls_screen.dart';
-
 import 'chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,12 +13,39 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: _currentIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _onPageChanged(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  void _onBottomNavTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+      _pageController.jumpToPage(index); // Or use animateToPage for smooth transition
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: _onPageChanged,
         children: const [
           ChatsScreen(),
           UpdatesScreen(),
@@ -30,11 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+        onTap: _onBottomNavTapped,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chats'),
           BottomNavigationBarItem(icon: Icon(Icons.update), label: 'Updates'),

@@ -11,8 +11,9 @@ class UpdatesScreen extends StatelessWidget {
         title: const Text(
           'Updates',
           style: TextStyle(
-            fontWeight: FontWeight.w700,
-            color: Color(0xff25d366),
+            fontSize: 25,
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
           ),
         ),
         backgroundColor: Colors.white54,
@@ -178,6 +179,101 @@ class UpdatesScreen extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Row(
+              children: [
+                Text(
+                  'Channels',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 160),
+                  child: Container(
+                    height: 25,
+                    width: 80,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Explore',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            itemCount: 4,
+            itemBuilder: (context, index) {
+              final channels = [
+                {
+                  'avatar': 'assets/images/bbc.png',
+                  'title': 'BBC News Urdu',
+                  'subtitle': 'محسن نقوی کا یہ بیان ایک ایسے وقت',
+                  'date': 'Yesterday',
+                },
+                {
+                  'avatar': 'assets/images/whatsapp.png',
+                  'title': 'Whatsapp',
+                  'subtitle': 'Appstrology: Virgo (23 August-22...',
+                  'date': 'Yesterday',
+                },
+                {
+                  'avatar': 'assets/images/flutter_craft.png',
+                  'title': 'Flutter Craft',
+                  'subtitle': 'Hey everyone, I\'m Asad Khan, manag...',
+                  'date': '12/8/2025',
+                },
+                {
+                  'avatar': 'assets/images/feelingsad.png',
+                  'title': 'Feeling Sad',
+                  'subtitle': 'ہمیشہ دیر کر دیتا ہوں میں',
+                  'date': '12/8/2025',
+                },
+              ];
+
+              return Column(
+                children: [
+                  ListTile(
+                    leading: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: AssetImage(channels[index]['avatar']!),
+                    ),
+                    title: Text(channels[index]['title']!),
+                    subtitle: Text(channels[index]['subtitle']!),
+                    trailing: Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Text(
+                        channels[index]['date']!,
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ),
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Opened ${channels[index]['title']} channel')),
+                      );
+                    },
+                  ),
+                  if (index < 3) Divider(height: 1, thickness: 0.5, color: Colors.grey.shade300),
+                ],
+              );
+            },
           ),
         ],
       ),
