@@ -18,6 +18,35 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(
+          'WhatsApp',
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            color: Color(0xff25d366),
+          ),
+        ),
+        backgroundColor: Colors.white,
+        bottomOpacity: 0,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search, color: Colors.grey),
+            onPressed: () {
+              // Implement search functionality
+            },
+          ),
+          PopupMenuButton(
+            icon: Icon(Icons.more_vert, color: Colors.grey),
+            itemBuilder: (context) => [
+              PopupMenuItem(child: Text('New group')),
+              PopupMenuItem(child: Text('Settings')),
+              PopupMenuItem(child: Text('Log out')),
+            ],
+          ),
+        ],
+      ),
+
       body: IndexedStack(
         index: _currentIndex,
         children: const [

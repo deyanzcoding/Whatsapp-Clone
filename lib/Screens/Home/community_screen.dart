@@ -201,6 +201,7 @@ class CommunityScreen extends StatelessWidget {
           ),
         ],
       ),
+
     );
   }
 }

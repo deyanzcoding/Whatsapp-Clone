@@ -50,7 +50,7 @@ class UpdatesScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Status boxes (as provided earlier)
+          // Status boxes
           Row(
             children: [
               Padding(
@@ -178,91 +178,6 @@ class UpdatesScreen extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-          SizedBox(height: 10),
-          // Channels header
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Row(
-              children: [
-                Text(
-                  'Channels',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 160),
-                  child: Container(
-                    height: 25,
-                    width: 80,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Explore',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          // Channels list
-          ListTile(
-            leading: CircleAvatar(
-              radius: 25,
-              backgroundImage: AssetImage('assets/images/bbc.png'),
-            ),
-            title: Text('BBC News Urdu'),
-            subtitle: Text('محسن نقوی کا یہ بیان ایک ایسے وقت'),
-            trailing: Padding(
-              padding: const EdgeInsets.only(bottom: 30),
-              child: Text('Yesterday'),
-            ),
-          ),
-          ListTile(
-            leading: CircleAvatar(
-              radius: 25,
-              backgroundImage: AssetImage('assets/images/whatsapp.png'),
-            ),
-            title: Text('Whatsapp'),
-            subtitle: Text('Appstrology: Virgo (23 August-22...'),
-            trailing: Padding(
-              padding: const EdgeInsets.only(bottom: 30),
-              child: Text('Yesterday'),
-            ),
-          ),
-          ListTile(
-            leading: CircleAvatar(
-              radius: 25,
-              backgroundImage: AssetImage('assets/images/flutter_craft.png'),
-            ),
-            title: Text('Flutter Craft'),
-            subtitle: Text('Hey everyone, I\'m Asad Khan, manag...'),
-            trailing: Padding(
-              padding: const EdgeInsets.only(bottom: 30),
-              child: Text('12/8/2025'),
-            ),
-          ),
-          ListTile(
-            leading: CircleAvatar(
-              radius: 25,
-              backgroundImage: AssetImage('assets/images/feelingsad.png'),
-            ),
-            title: Text('Feeling Sad'),
-            subtitle: Text('ہمیشہ دیر کر دیتا ہوں میں'),
-            trailing: Padding(
-              padding: const EdgeInsets.only(bottom: 30),
-              child: Text('12/8/2025'),
-            ),
           ),
         ],
       ),
