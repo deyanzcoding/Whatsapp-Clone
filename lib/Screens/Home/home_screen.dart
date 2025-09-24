@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/Screens/Home/updates_screen.dart';
+import 'package:whatsapp_clone/Screens/Home/community_screen.dart';
+import 'package:whatsapp_clone/Screens/Home/calls_screen.dart';
 
-import 'calls_screen.dart';
-import 'community_screen.dart';
+import 'chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,10 +13,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0; // Tracks the selected tab (0: Chats, 1: Updates, 2: Community, 3: Calls)
 
-  int _currentIndex = 0; // Tracks the selected tab (0: Chats, 1: Status, 2: Calls)
   // List of screens for each tab
   final List<Widget> _screens = [
+    ChatsScreen(), // Replaced UpdatesScreen with ChatsScreen
     UpdatesScreen(),
     CommunityScreen(),
     CallsScreen(),
@@ -30,7 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
     const BottomNavigationBarItem(
       icon: Icon(Icons.update),
       label: 'Updates',
-    ),const BottomNavigationBarItem(
+    ),
+    const BottomNavigationBarItem(
       icon: Icon(Icons.people_alt),
       label: 'Community',
     ),
@@ -44,24 +47,43 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      automaticallyImplyLeading: false,
+        automaticallyImplyLeading: false,
         title: Text(
-          'Whatsapp',
+          'WhatsApp',
           style: TextStyle(
             fontWeight: FontWeight.w700,
-            color: Color(0xff25d377),
+            color: Color(0xff25d366),
           ),
         ),
-
         backgroundColor: Colors.white,
         bottomOpacity: 0,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search, color: Colors.grey),
+            onPressed: () {
+              // Implement search functionality
+            },
+          ),
+          PopupMenuButton(
+            icon: Icon(Icons.more_vert, color: Colors.grey),
+            itemBuilder: (context) => [
+              PopupMenuItem(child: Text('New group')),
+              PopupMenuItem(child: Text('Settings')),
+              PopupMenuItem(child: Text('Log out')),
+            ],
+          ),
+        ],
       ),
-      body: IndexedStack( // Keeps screens alive; use PageView if you prefer swipe gestures
+
+
+
+      
+      body: IndexedStack(
         index: _currentIndex,
         children: _screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed, // Ensures equal spacing for 4+ items
+        type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
@@ -69,13 +91,29 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
         items: _navBarItems,
-        selectedItemColor: const Color(0xff25d366), // WhatsApp green for selected
+        selectedItemColor: Color(0xff25d366),
         unselectedItemColor: Colors.grey,
         backgroundColor: Colors.white,
-        elevation: 8, // Slight shadow like WhatsApp
+        elevation: 8,
       ),
-
-
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Handle new chat/status/call action based on tab
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Start a new ${_navBarItems[_currentIndex].label}')),
+          );
+        },
+        backgroundColor: Color(0xff25d366),
+        child: Icon(
+          _currentIndex == 0
+              ? Icons.message
+              : _currentIndex == 1
+              ? Icons.camera_alt
+              : Icons.call,
+          color: Colors.white,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
