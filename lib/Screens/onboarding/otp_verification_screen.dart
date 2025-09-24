@@ -42,94 +42,96 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         ],
       ),
 
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        child: Column(
-          children: [
-            UiHelper.CustomText(
-              text: "Verify ${widget.phonenumber}",
-              height: 25,
-              color: Colors.black,
-              fontweight: FontWeight.w600,
-            ),
-            SizedBox(height: 40),
-
-            Image.asset("assets/images/otp_verification.png", scale: 3),
-            SizedBox(height: 40),
-
-            UiHelper.CustomText(
-              text:
-                  "Use your other phone to confirm moving WhatsApp to this one",
-              height: 15,
-              color: Colors.black,
-              fontweight: FontWeight.w500,
-              textalignment: TextAlign.center,
-            ),
-            SizedBox(height: 25),
-
-            UiHelper.CustomText(
-              text:
-                  "Enter the 6-digit code we sent to WhatsApp on your other phone.",
-              height: 15,
-              color: Colors.black,
-              fontweight: FontWeight.w400,
-              textalignment: TextAlign.center,
-            ),
-            SizedBox(height: 30),
-
-            //otp-field
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: PinCodeTextField(
-                appContext: context,
-                length: 6,
-                enableActiveFill: true,
-                keyboardType: TextInputType.number,
-                showCursor: false,
-                onCompleted: (value) {
-                  if (value.length == 6) {
-                    Future.delayed(Duration(seconds: 3), () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProfileScreen(),
-                        ),
-                      );
-                    });
-                  }
-                },
-                onChanged: (value) {
-                  print(value);
-                },
-
-                pinTheme: PinTheme(
-                  shape: PinCodeFieldShape.box,
-                  // 👈 underline style
-                  fieldOuterPadding: EdgeInsets.symmetric(horizontal: 1.5),
-                  borderRadius: BorderRadius.circular(10),
-                  borderWidth: 1,
-                  fieldHeight: 45,
-                  fieldWidth: 45,
-                  //border
-                  selectedColor: Color(0xffD9D9D9),
-                  inactiveColor: Color(0xffD9D9D9),
-
-                  //background fill
-                  inactiveFillColor: Color(0xffD9D9D9),
-                  activeFillColor: Color(0xffD9D9D9),
-                  selectedFillColor: Color(0xffD9D9D9),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+          child: Column(
+            children: [
+              UiHelper.CustomText(
+                text: "Verify ${widget.phonenumber}",
+                height: 25,
+                color: Colors.black,
+                fontweight: FontWeight.w600,
+              ),
+              SizedBox(height: 40),
+        
+              Image.asset("assets/images/otp_verification.png", scale: 3),
+              SizedBox(height: 40),
+        
+              UiHelper.CustomText(
+                text:
+                    "Use your other phone to confirm moving WhatsApp to this one",
+                height: 15,
+                color: Colors.black,
+                fontweight: FontWeight.w500,
+                textalignment: TextAlign.center,
+              ),
+              SizedBox(height: 25),
+        
+              UiHelper.CustomText(
+                text:
+                    "Enter the 6-digit code we sent to WhatsApp on your other phone.",
+                height: 15,
+                color: Colors.black,
+                fontweight: FontWeight.w400,
+                textalignment: TextAlign.center,
+              ),
+              SizedBox(height: 30),
+        
+              //otp-field
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: PinCodeTextField(
+                  appContext: context,
+                  length: 6,
+                  enableActiveFill: true,
+                  keyboardType: TextInputType.number,
+                  showCursor: false,
+                  onCompleted: (value) {
+                    if (value.length == 6) {
+                      Future.delayed(Duration(seconds: 3), () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProfileScreen(),
+                          ),
+                        );
+                      });
+                    }
+                  },
+                  onChanged: (value) {
+                    print(value);
+                  },
+        
+                  pinTheme: PinTheme(
+                    shape: PinCodeFieldShape.box,
+                    // 👈 underline style
+                    fieldOuterPadding: EdgeInsets.symmetric(horizontal: 1.5),
+                    borderRadius: BorderRadius.circular(10),
+                    borderWidth: 1,
+                    fieldHeight: 45,
+                    fieldWidth: 45,
+                    //border
+                    selectedColor: Color(0xffD9D9D9),
+                    inactiveColor: Color(0xffD9D9D9),
+        
+                    //background fill
+                    inactiveFillColor: Color(0xffD9D9D9),
+                    activeFillColor: Color(0xffD9D9D9),
+                    selectedFillColor: Color(0xffD9D9D9),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 45),
-
-            UiHelper.CustomText(
-              text: 'Need help getting a code?',
-              height: 15,
-              fontweight: FontWeight.w600,
-              color: Color(0xff25d377),
-            ),
-          ],
+              SizedBox(height: 45),
+        
+              UiHelper.CustomText(
+                text: 'Need help getting a code?',
+                height: 15,
+                fontweight: FontWeight.w600,
+                color: Color(0xff25d377),
+              ),
+            ],
+          ),
         ),
       ),
     );

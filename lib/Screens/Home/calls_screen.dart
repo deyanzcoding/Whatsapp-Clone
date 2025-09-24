@@ -20,7 +20,7 @@ class CallsScreen extends StatelessWidget {
           elevation: 0,
           actions: [
             IconButton(
-              icon: const Icon(Icons.camera_alt, color: Colors.grey),
+              icon: const Icon(Icons.search_rounded, color: Colors.black),
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Open camera for status')),
@@ -28,7 +28,7 @@ class CallsScreen extends StatelessWidget {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.edit, color: Colors.grey),
+              icon: const Icon(Icons.more_vert, color: Colors.black),
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Edit status')),

@@ -33,13 +33,13 @@ class _ChatsScreenState extends State<ChatsScreen> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.camera_alt_outlined, color: Colors.black38),
+            icon: const Icon(Icons.camera_alt_outlined, color: Colors.black),
             onPressed: () {
               // Optional: Could expand search bar or navigate to search screen
             },
           ),
           PopupMenuButton<String>(
-            icon: const Icon(Icons.more_vert, color: Colors.grey),
+            icon: const Icon(Icons.more_vert, color: Colors.black),
             onSelected: (value) {
               if (value == 'new_group') {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -102,6 +102,11 @@ class _ChatsScreenState extends State<ChatsScreen> {
               radius: 25,
               backgroundImage: AssetImage('assets/images/hassnain_uni_f.jpeg'),
             ),
+            onTap: () {
+              Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ChatsScreen())
+              );
+            },
             title: Text('Hassnain Uni F'),
             subtitle: Text('You reacted ❤️ to "🎙️ 0:36"'),
             trailing: Text('10:12 AM'),
