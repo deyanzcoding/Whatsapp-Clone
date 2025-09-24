@@ -1,119 +1,150 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone/Screens/Home/updates_screen.dart';
-import 'package:whatsapp_clone/Screens/Home/community_screen.dart';
-import 'package:whatsapp_clone/Screens/Home/calls_screen.dart';
 
-import 'chat_screen.dart';
-
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class ChatsScreen extends StatefulWidget {
+  const ChatsScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ChatsScreen> createState() => _ChatsScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0; // Tracks the selected tab (0: Chats, 1: Updates, 2: Community, 3: Calls)
+class _ChatsScreenState extends State<ChatsScreen> {
+  final TextEditingController _searchController = TextEditingController();
 
-  // List of screens for each tab
-  final List<Widget> _screens = [
-    ChatsScreen(), // Replaced UpdatesScreen with ChatsScreen
-    UpdatesScreen(),
-    CommunityScreen(),
-    CallsScreen(),
-  ];
-
-  // List of BottomNavigationBar items
-  final List<BottomNavigationBarItem> _navBarItems = [
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.chat),
-      label: 'Chats',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.update),
-      label: 'Updates',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.people_alt),
-      label: 'Community',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.call),
-      label: 'Calls',
-    ),
-  ];
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(
-          'WhatsApp',
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-            color: Color(0xff25d366),
+    return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      children: [
+        // Chats header
+        Padding(
+          padding: const EdgeInsets.only(left: 10, top: 5),
+          child: Text(
+            'Chats',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
-        backgroundColor: Colors.white,
-        bottomOpacity: 0,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search, color: Colors.grey),
-            onPressed: () {
-              // Implement search functionality
-            },
+        // Search bar (placed below header, WhatsApp style)
+        Padding(
+          padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+          child: Container(
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Icon(Icons.search, color: Colors.grey[600]),
+                ),
+                Expanded(
+                  child: TextField(
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                      hintText: 'Search or start a new chat',
+                      border: InputBorder.none,
+                      hintStyle: TextStyle(color: Colors.grey[600]),
+                    ),
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              ],
+            ),
           ),
-          PopupMenuButton(
-            icon: Icon(Icons.more_vert, color: Colors.grey),
-            itemBuilder: (context) => [
-              PopupMenuItem(child: Text('New group')),
-              PopupMenuItem(child: Text('Settings')),
-              PopupMenuItem(child: Text('Log out')),
+        ),
+        // Original chat list (reverted as requested)
+        ListTile(
+          leading: CircleAvatar(
+            radius: 25,
+            backgroundImage: AssetImage('assets/images/hassnain_uni_f.jpeg'),
+          ),
+          title: Text('Hassnain Uni F'),
+          subtitle: Text('You reacted ❤️ to "🎙️ 0:36"'),
+          trailing: Text('10:12 AM'),
+        ),
+        ListTile(
+          leading: CircleAvatar(
+            radius: 25,
+            backgroundImage: AssetImage('assets/images/shogaib_uni_f.jpeg'),
+          ),
+          title: Text('Shogaib Uni F'),
+          subtitle: Text('Shogaib reacted 😂 to "Sta pa sh..."'),
+          trailing: Text('07:53 AM'),
+        ),
+        ListTile(
+          leading: CircleAvatar(
+            radius: 25,
+            backgroundImage: AssetImage('assets/images/deyan.jpg'),
+          ),
+          title: Text(
+            '(You)',
+            style: TextStyle(fontWeight: FontWeight.w500),
+          ),
+          subtitle: Text('Explain container widg...'),
+          trailing: Text('07:49 AM'),
+        ),
+        ListTile(
+          leading: CircleAvatar(
+            radius: 25,
+            backgroundImage: AssetImage('assets/images/abdullah_uni_f.jpg'),
+          ),
+          title: Text('Abdullah Uni F'),
+          subtitle: Row(
+            children: [
+              Icon(Icons.call_missed_outgoing, size: 16, color: Colors.red),
+              SizedBox(width: 4),
+              Text('Voice call'),
             ],
           ),
-        ],
-      ),
-
-
-
-      
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _screens,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: _navBarItems,
-        selectedItemColor: Color(0xff25d366),
-        unselectedItemColor: Colors.grey,
-        backgroundColor: Colors.white,
-        elevation: 8,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Handle new chat/status/call action based on tab
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Start a new ${_navBarItems[_currentIndex].label}')),
-          );
-        },
-        backgroundColor: Color(0xff25d366),
-        child: Icon(
-          _currentIndex == 0
-              ? Icons.message
-              : _currentIndex == 1
-              ? Icons.camera_alt
-              : Icons.call,
-          color: Colors.white,
+          trailing: Text('07:49 AM'),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        ListTile(
+          leading: CircleAvatar(
+            radius: 25,
+            backgroundImage: AssetImage('assets/images/bilal_uni_f.jpg'),
+          ),
+          title: Text('Bilal Uni F'),
+          subtitle: Text('Da ho Hassnain de sam 😂'),
+          trailing: Text('07:22 AM'),
+        ),
+        ListTile(
+          leading: CircleAvatar(
+            radius: 25,
+            backgroundImage: AssetImage('assets/images/hassnain_uni_f.jpeg'),
+          ),
+          title: Text('Hassnain Uni F'),
+          subtitle: Text('You reacted ❤️ to "🎙️ 0:36"'),
+          trailing: Text('10:12 AM'),
+        ),
+        ListTile(
+          leading: CircleAvatar(
+            radius: 25,
+            backgroundImage: AssetImage('assets/images/shogaib_uni_f.jpeg'),
+          ),
+          title: Text('Shogaib Uni F'),
+          subtitle: Text('Shogaib reacted 😂 to "Sta pa sh..."'),
+          trailing: Text('07:53 AM'),
+        ),
+        ListTile(
+          leading: CircleAvatar(
+            radius: 25,
+            backgroundImage: AssetImage('assets/images/bilal_uni_f.jpg'),
+          ),
+          title: Text('Bilal Uni F'),
+          subtitle: Text('Da ho Hassnain de sam 😂'),
+          trailing: Text('07:22 AM'),
+        ),
+      ],
     );
   }
 }
