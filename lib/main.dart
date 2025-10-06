@@ -26,9 +26,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF00A884)),
         useMaterial3: false,
       ),
-      // home: SplashScreen()
-      home: HomeScreen(),
-
+      home: SplashScreen()
     );
   }
 }

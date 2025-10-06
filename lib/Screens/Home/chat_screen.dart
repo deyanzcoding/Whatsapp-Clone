@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'userDummyChat.dart'; // Import the UserDummyChat screen
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
@@ -16,6 +20,8 @@ class _ChatsScreenState extends State<ChatsScreen> {
     super.dispose();
   }
 
+  File? pickedimage;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,12 +38,9 @@ class _ChatsScreenState extends State<ChatsScreen> {
         backgroundColor: Colors.white54,
         elevation: 0,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.camera_alt_outlined, color: Colors.black),
-            onPressed: () {
-              // Optional: Could expand search bar or navigate to search screen
-            },
-          ),
+          IconButton(onPressed: () {
+            _pickImage(ImageSource.camera);
+          }, icon: const Icon(Icons.add_a_photo, color: Colors.black),),
           PopupMenuButton<String>(
             icon: const Icon(Icons.more_vert, color: Colors.black),
             onSelected: (value) {
@@ -103,8 +106,9 @@ class _ChatsScreenState extends State<ChatsScreen> {
               backgroundImage: AssetImage('assets/images/hassnain_uni_f.jpeg'),
             ),
             onTap: () {
-              Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ChatsScreen())
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserDummyChat()),
               );
             },
             title: Text('Hassnain Uni F'),
@@ -114,10 +118,31 @@ class _ChatsScreenState extends State<ChatsScreen> {
           ListTile(
             leading: CircleAvatar(
               radius: 25,
+              backgroundImage: AssetImage('assets/images/uni_friendz.jpg'),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserDummyChat()),
+              );
+            },
+            title: Text('Uni frndz ❣️🥰'),
+            subtitle: Text('Sbala platter frie...'),
+            trailing: Text('10:12 AM'),
+          ),
+          ListTile(
+            leading: CircleAvatar(
+              radius: 25,
               backgroundImage: AssetImage('assets/images/shogaib_uni_f.jpeg'),
             ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserDummyChat()),
+              );
+            },
             title: Text('Shogaib Uni F'),
-            subtitle: Text('Shogaib reacted 😂 to "Sta pa sh..."'),
+            subtitle: Text('Shogaib reacted 😂 to "Sta ..."'),
             trailing: Text('07:53 AM'),
           ),
           ListTile(
@@ -125,6 +150,12 @@ class _ChatsScreenState extends State<ChatsScreen> {
               radius: 25,
               backgroundImage: AssetImage('assets/images/deyan.jpg'),
             ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserDummyChat()),
+              );
+            },
             title: Text(
               '(You)',
               style: TextStyle(fontWeight: FontWeight.w500),
@@ -137,6 +168,12 @@ class _ChatsScreenState extends State<ChatsScreen> {
               radius: 25,
               backgroundImage: AssetImage('assets/images/abdullah_uni_f.jpg'),
             ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserDummyChat()),
+              );
+            },
             title: Text('Abdullah Uni F'),
             subtitle: Row(
               children: [
@@ -152,6 +189,12 @@ class _ChatsScreenState extends State<ChatsScreen> {
               radius: 25,
               backgroundImage: AssetImage('assets/images/bilal_uni_f.jpg'),
             ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserDummyChat()),
+              );
+            },
             title: Text('Bilal Uni F'),
             subtitle: Text('Da ho Hassnain de sam 😂'),
             trailing: Text('07:22 AM'),
@@ -161,6 +204,12 @@ class _ChatsScreenState extends State<ChatsScreen> {
               radius: 25,
               backgroundImage: AssetImage('assets/images/hassnain_uni_f.jpeg'),
             ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserDummyChat()),
+              );
+            },
             title: Text('Hassnain Uni F'),
             subtitle: Text('You reacted ❤️ to "🎙️ 0:36"'),
             trailing: Text('10:12 AM'),
@@ -170,6 +219,12 @@ class _ChatsScreenState extends State<ChatsScreen> {
               radius: 25,
               backgroundImage: AssetImage('assets/images/shogaib_uni_f.jpeg'),
             ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserDummyChat()),
+              );
+            },
             title: Text('Shogaib Uni F'),
             subtitle: Text('Shogaib reacted 😂 to "Sta pa sh..."'),
             trailing: Text('07:53 AM'),
@@ -179,6 +234,12 @@ class _ChatsScreenState extends State<ChatsScreen> {
               radius: 25,
               backgroundImage: AssetImage('assets/images/bilal_uni_f.jpg'),
             ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserDummyChat()),
+              );
+            },
             title: Text('Bilal Uni F'),
             subtitle: Text('Da ho Hassnain de sam 😂'),
             trailing: Text('07:22 AM'),
@@ -186,5 +247,19 @@ class _ChatsScreenState extends State<ChatsScreen> {
         ],
       ),
     );
+  }
+
+  //function for picking image
+  _pickImage(ImageSource imagesource) async {
+    try {
+      final photo = await ImagePicker().pickImage(source: imagesource);
+      if(photo == null) return;
+      final tempimage = File(photo.path);
+      setState(() {
+        pickedimage = tempimage;
+      });
+    } catch(ex) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(ex.toString()), backgroundColor: Color(0xff25d377),));
+    }
   }
 }

@@ -1,188 +1,245 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
-class ChatsScreen extends StatelessWidget {
-  const ChatsScreen({super.key});
-
-  // Dummy contact list
-  final List<Map<String, String>> contacts = const [
-    {'name': 'Alice', 'lastMessage': 'Hey, how are you?', 'time': '10:30 AM'},
-    {'name': 'Bob', 'lastMessage': 'See you tomorrow!', 'time': 'Yesterday'},
-    {'name': 'Charlie', 'lastMessage': 'Can we meet at 5?', 'time': '2:15 PM'},
-  ];
+class UserDummyChat extends StatefulWidget {
+  const UserDummyChat({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Chats'),
-        backgroundColor: const Color(0xff075e54),
-        foregroundColor: Colors.white,
-        actions: [
-          IconButton(icon: const Icon(Icons.search), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
-        ],
-      ),
-      body: ListView.builder(
-        itemCount: contacts.length,
-        itemBuilder: (context, index) {
-          final contact = contacts[index];
-          return ListTile(
-            leading: CircleAvatar(
-              backgroundColor: Colors.grey[300],
-              child: Text(
-                contact['name']![0],
-                style: const TextStyle(color: Colors.black),
-              ),
-            ),
-            title: Text(contact['name']!),
-            subtitle: Text(contact['lastMessage']!),
-            trailing: Text(contact['time']!),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => UserChatScreen(contactName: contact['name']!),
-                ),
-              );
-            },
-          );
-        },
-      ),
-    );
-  }
+  State<UserDummyChat> createState() => _UserDummyChatState();
 }
 
-class UserChatScreen extends StatefulWidget {
-  final String contactName;
-
-  const UserChatScreen({super.key, required this.contactName});
-
-  @override
-  State<UserChatScreen> createState() => _UserChatScreenState();
-}
-
-class _UserChatScreenState extends State<UserChatScreen> {
+class _UserDummyChatState extends State<UserDummyChat> {
   final TextEditingController _messageController = TextEditingController();
   final List<Map<String, dynamic>> _messages = [
-    {'text': 'Hey, how’s it going?', 'isSent': false, 'time': '10:20 AM'},
-    {'text': 'All good here! You?', 'isSent': true, 'time': '10:22 AM'},
-    {'text': 'Just chilling. Wanna grab coffee later?', 'isSent': false, 'time': '10:25 AM'},
-    {'text': 'Sure, let’s do 3 PM!', 'isSent': true, 'time': '10:26 AM'},
+    {'text': 'Alka hbaar ho na yaeae kna', 'time': '8:20 PM', 'isSent': false},
+    {'text': 'Bilal bag aghasta da 🎒', 'time': '8:21 PM', 'isSent': false},
+    {'text': 'Sam sha gani yadom di warta', 'time': '8:45 PM', 'isSent': true},
+    {'text': 'Reshya waima @Hasnain Uni F @Shogaib Uni F', 'time': '8:47 PM', 'isSent': false},
+    {'text': 'Bilal lala\nSam sha kane aghi ta di yadom\nGena da kee alke', 'time': '8:47 PM', 'isSent': true},
+    {'text': 'Shoiba alak bandi party done kaee, zvii ee shwa', 'time': '8:48 PM', 'isSent': false},
+    {'text': 'Shoiba alak bandi party done kaee\nZvii ee shwa', 'time': '8:49 PM', 'isSent': true},
+    {'text': 'Aoo kana', 'time': '8:49 PM', 'isSent': true},
+    {'text': 'Sbla platter friendz(PF) party 🎉', 'time': '8:49 PM', 'isSent': false},
   ];
+  File? pickedimage;
 
   void _sendMessage() {
     if (_messageController.text.trim().isNotEmpty) {
       setState(() {
         _messages.add({
           'text': _messageController.text,
-          'isSent': true,
           'time': TimeOfDay.now().format(context),
+          'isSent': true,
         });
         _messageController.clear();
       });
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.contactName),
-        backgroundColor: const Color(0xff075e54),
-        foregroundColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
-        ),
-        actions: [
-          IconButton(icon: const Icon(Icons.videocam), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.call), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
-        ],
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(8.0),
-              itemCount: _messages.length,
-              itemBuilder: (context, index) {
-                final message = _messages[index];
-                final isSent = message['isSent'] as bool;
-                return Align(
-                  alignment: isSent ? Alignment.centerRight : Alignment.centerLeft,
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-                    padding: const EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      color: isSent ? const Color(0xff25d366) : Colors.grey[200],
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Column(
-                      crossAxisAlignment:
-                      isSent ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          message['text'],
-                          style: TextStyle(
-                            color: isSent ? Colors.white : Colors.black,
-                          ),
-                        ),
-                        const SizedBox(height: 4.0),
-                        Text(
-                          message['time'],
-                          style: TextStyle(
-                            fontSize: 12.0,
-                            color: isSent ? Colors.white70 : Colors.black54,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _messageController,
-                    decoration: InputDecoration(
-                      hintText: 'Type a message',
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                        borderSide: BorderSide.none,
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16.0,
-                        vertical: 10.0,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8.0),
-                FloatingActionButton(
-                  onPressed: _sendMessage,
-                  backgroundColor: const Color(0xff25d366),
-                  mini: true,
-                  child: const Icon(Icons.send, color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+  void _startVoiceRecording() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Recording started...')),
     );
+  }
+
+  void _stopVoiceRecording() {
+    setState(() {
+      _messages.add({
+        'text': 'Voice message',
+        'time': TimeOfDay.now().format(context),
+        'isSent': true,
+      });
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Recording stopped')),
+    );
+  }
+
+  _pickImage(ImageSource imagesource) async {
+    try {
+      final photo = await ImagePicker().pickImage(source: imagesource);
+      if (photo == null) return;
+      final tempimage = File(photo.path);
+      setState(() {
+        pickedimage = tempimage;
+        if (pickedimage != null) {
+          _messages.add({
+            'image': pickedimage,
+            'time': TimeOfDay.now().format(context),
+            'isSent': true,
+          });
+        }
+      });
+    } catch (ex) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(ex.toString()), backgroundColor: Color(0xff25d377)),
+      );
+    }
   }
 
   @override
   void dispose() {
     _messageController.dispose();
     super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        backgroundColor: const Color(0xff075e54),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(width: 0),
+            CircleAvatar(
+              backgroundImage: AssetImage('assets/images/uni_friendz.jpg'),
+              radius: 18,
+            ),
+            const SizedBox(width: 4),
+            Flexible(
+              child: Text(
+                'Uni frnds 💕😍',
+                style: TextStyle(color: Colors.white),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const SizedBox(width: 8),
+          ],
+        ),
+        actions: [
+          IconButton(icon: const Icon(Icons.videocam, color: Colors.white), onPressed: () {}),
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_vert, color: Colors.white),
+            onSelected: (value) {
+              // Add your onSelected logic here if needed
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(value: 'option1', child: Text('Option 1')),
+            ],
+          ),
+        ],
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/user_chat_screen_background.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.all(8.0),
+                itemCount: _messages.length,
+                itemBuilder: (context, index) {
+                  final message = _messages[index];
+                  if (message.containsKey('image') && message['image'] != null) {
+                    return Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                        child: Image.file(
+                          message['image'],
+                          width: 200,
+                          height: 200,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  }
+                  return _buildMessage(
+                    text: message['text'],
+                    time: message['time'],
+                    isSent: message['isSent'],
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _messageController,
+                      decoration: InputDecoration(
+                        hintText: 'Message',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                      ),
+                      onSubmitted: (_) => _sendMessage(),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.camera_alt, color: Colors.green),
+                    onPressed: () => _pickImage(ImageSource.camera),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.image, color: Colors.green),
+                    onPressed: () => _pickImage(ImageSource.gallery),
+                  ),
+                  GestureDetector(
+                    onLongPress: _startVoiceRecording,
+                    onLongPressUp: () => _stopVoiceRecording(),
+                    child: Icon(
+                      Icons.mic,
+                      color: Colors.green,
+                      size: 28,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMessage({
+    required String text,
+    required String time,
+    required bool isSent,
+  }) {
+    return Align(
+      alignment: isSent ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+        padding: const EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          color: isSent ? const Color(0xff25d366) : Colors.green[100],
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Column(
+          crossAxisAlignment: isSent ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+          children: [
+            Text(
+              text,
+              style: TextStyle(
+                color: isSent ? Colors.white : Colors.black,
+              ),
+            ),
+            const SizedBox(height: 4.0),
+            Text(
+              time,
+              style: TextStyle(
+                fontSize: 12.0,
+                color: isSent ? Colors.white70 : Colors.black54,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _onBottomNavTapped(int index) {
     setState(() {
       _currentIndex = index;
-      _pageController.jumpToPage(index); // Or use animateToPage for smooth transition
+      _pageController.jumpToPage(index);
     });
   }
 
@@ -69,14 +69,35 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 8,
       ),
       floatingActionButton: _currentIndex == 0
-          ? FloatingActionButton(
-        onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Add new contact')),
-          );
-        },
-        backgroundColor: const Color(0xff25d366),
-        child: const Icon(Icons.person_add, color: Colors.white),
+          ? Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Open Meta AI')),
+              );
+            },
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            splashColor: Colors.grey.withOpacity(0.3), // Subtle tap effect
+            child: Image.asset(
+              'assets/images/metaAi.png',
+              width: 60,
+              height: 60,
+            ),
+          ),
+          const SizedBox(height: 10), // Space between buttons
+          FloatingActionButton(
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Add new contact')),
+              );
+            },
+            backgroundColor: const Color(0xff25d366),
+            child: const Icon(Icons.person_add, color: Colors.white),
+          ),
+        ],
       )
           : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
